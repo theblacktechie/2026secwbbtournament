@@ -57,7 +57,7 @@ b.r2[3].t1 = "Alabama";
 
 - React 18 via CDN : no build step required
 - Babel standalone for in-browser JSX transpiling
-- [Barlow & Barlow Condensed](https://fonts.google.com/specimen/Barlow) via Google Fonts
+- [Inter](https://fonts.google.com/specimen/Inter) via Google Fonts
 - Pure inline styles : zero dependencies
 
 ---
@@ -66,4 +66,4 @@ b.r2[3].t1 = "Alabama";
 
 - Tournament data: [SEC Sports](https://www.secsports.com)
 - Design inspiration: The Athletic, Sportico
-- Font: [Barlow by Jeremy Tribby](https://fonts.google.com/specimen/Barlow)
+- Font: [Inter by Rasmus Andersson](https://fonts.google.com/specimen/Inter)
