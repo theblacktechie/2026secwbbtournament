@@ -55,10 +55,10 @@ b.r2[3].t1 = "Alabama";
 
 ## Tech
 
-- React 18 via CDN — no build step required
+- React 18 via CDN : no build step required
 - Babel standalone for in-browser JSX transpiling
 - [Barlow & Barlow Condensed](https://fonts.google.com/specimen/Barlow) via Google Fonts
-- Pure inline styles — zero dependencies
+- Pure inline styles : zero dependencies
 
 ---
 
