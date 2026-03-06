@@ -92,6 +92,24 @@ const STATS = {
     star2:"Dani Carnegie",starSt2:"18 pts · 7-21 FG · 4 reb · 4 ast",
     notes:"Clara Strack was unstoppable, dropping 33 points on 54.5% shooting to lead Kentucky wire to wire. The Wildcats shot 50% from the field and dominated the glass 35-26. Georgia hung around in the 2nd quarter but Kentucky's 4th quarter surge put it away.",
   },
+  g6:{
+    score1:"64",score2:"82",
+    q1_1:"22",q2_1:"16",q3_1:"7", q4_1:"19",
+    q1_2:"22",q2_2:"18",q3_2:"27",q4_2:"15",
+    reb1:"39",ast1:"9", reb2:"47",ast2:"21",
+    star1:"Liv McGill",    starSt1:"28 pts · 7-21 FG · 13-17 FT · 8 reb · 4 ast",
+    star2:"Raegan Beers",  starSt2:"18 pts · 7-10 FG · 7 reb",
+    notes:"Florida and Oklahoma were dead even through the first half, but the Sooners exploded for 27 points in the 3rd quarter to blow it open. Liv McGill kept Florida alive with 28 heroic points but the Gators' 3rd quarter collapse (scoring just 7) was fatal. Oklahoma's 47 rebounds and 21 assists showed a well-oiled machine.",
+  },
+  g7:{
+    score1:"57",score2:"73",
+    q1_1:"6", q2_1:"14",q3_1:"17",q4_1:"20",
+    q1_2:"21",q2_2:"27",q3_2:"10",q4_2:"15",
+    reb1:"23",ast1:"10",reb2:"40",ast2:"16",
+    star1:"Khady Leye",       starSt1:"17 pts · 5-13 FG · 7-11 FT · 8 reb",
+    star2:"Christeen Iwuala", starSt2:"18 pts · 8-8 FG (perfect) · 9 reb",
+    notes:"Ole Miss came out on fire, building a massive first-half lead behind a 48-point explosion through two quarters. Auburn fought back in the 3rd and 4th but the deficit was too deep. Christeen Iwuala was flawless, going 8-for-8 from the field. Ole Miss dominated the glass 40-23 and led wire to wire, with the score never tied and the lead never changing.",
+  },
 };
 
 function initBracket() {
@@ -120,11 +138,19 @@ function initBracket() {
     ],
     fin:[{id:"g15",t1:null,t2:null,winner:null,time:"3:00 PM"}],
   };
+  // R1 winners
   b.r1[0].winner="Kentucky";
   b.r1[1].winner="Florida";
   b.r1[2].winner="Auburn";
   b.r1[3].winner="Alabama";
+  // R2 winners
   b.r2[0].winner="Kentucky"; b.qf[0].t2="Kentucky";
+  b.r2[1].winner="Oklahoma"; b.qf[0].t2="Kentucky"; // QF top half: SC vs Kentucky
+  b.r2[2].winner="Ole Miss"; b.qf[1].t2="Ole Miss";
+  // propagate R2 winners into QF slots
+  b.qf[0].t2="Kentucky";
+  b.qf[1].t2="Oklahoma";
+  b.qf[2].t2="Ole Miss";
   return b;
 }
 
@@ -279,7 +305,7 @@ function GameCard(props){
 function App(){
   var s=useState(initBracket),bracket=s[0],setBracket=s[1];
   var u=useState({}),userStats=u[0],setUserStats=u[1];
-  var r=useState(0),activeRound=r[0],setActiveRound=r[1];
+  var r=useState(1),activeRound=r[0],setActiveRound=r[1];
   var g=useState(null),gameCard=g[0],setGameCard=g[1];
   var f=useState({}),form=f[0],setForm=f[1];
   var touch=useRef(null);
