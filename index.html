@@ -110,6 +110,15 @@ const STATS = {
     star2:"Christeen Iwuala", starSt2:"18 pts · 8-8 FG (perfect) · 9 reb",
     notes:"Ole Miss came out on fire, building a massive first-half lead behind a 48-point explosion through two quarters. Auburn fought back in the 3rd and 4th but the deficit was too deep. Christeen Iwuala was flawless, going 8-for-8 from the field. Ole Miss dominated the glass 40-23 and led wire to wire, with the score never tied and the lead never changing.",
   },
+  g8:{
+    score1:"76",score2:"64",
+    q1_1:"25",q2_1:"14",q3_1:"22",q4_1:"15",
+    q1_2:"18",q2_2:"11",q3_2:"17",q4_2:"18",
+    reb1:"29",ast1:"13",reb2:"30",ast2:"10",
+    star1:"Jessica Timmons",starSt1:"23 pts · 8-16 FG · 3-5 from 3 · 4-4 FT · 3 reb",
+    star2:"Janiah Barker",  starSt2:"20 pts · 6-14 FG · 2-5 from 3 · 6-8 FT · 5 reb",
+    notes:"Alabama dominated the first quarter 25-18 and never looked back. Jessica Timmons led the way with 23 on 50% shooting while Ta'Mia Scott added 20. Tennessee's Janiah Barker kept the Vols competitive with 20 points but the Tide's 84.2% from the free throw line (16-19) was the difference. Alabama advances to the Quarterfinals.",
+  },
 };
 
 function initBracket() {
@@ -144,13 +153,15 @@ function initBracket() {
   b.r1[2].winner="Auburn";
   b.r1[3].winner="Alabama";
   // R2 winners
-  b.r2[0].winner="Kentucky"; b.qf[0].t2="Kentucky";
-  b.r2[1].winner="Oklahoma"; b.qf[0].t2="Kentucky"; // QF top half: SC vs Kentucky
-  b.r2[2].winner="Ole Miss"; b.qf[1].t2="Ole Miss";
+  b.r2[0].winner="Kentucky";
+  b.r2[1].winner="Oklahoma";
+  b.r2[2].winner="Ole Miss";
+  b.r2[3].winner="Alabama";
   // propagate R2 winners into QF slots
   b.qf[0].t2="Kentucky";
   b.qf[1].t2="Oklahoma";
   b.qf[2].t2="Ole Miss";
+  b.qf[3].t2="Alabama";
   return b;
 }
 
@@ -286,7 +297,7 @@ function GameCard(props){
               ),
               el(Lbl,null,"🏅 Top Scorer"),
               el("div",{style:{fontFamily:F,fontWeight:700,fontSize:13,color:"#1a1a1a",marginBottom:2}},form["star"+sfx]||"—"),
-              el("div",{style:{fontSize:11,color:"#777",fontWeight:500,fontFamily:F}},form["starSt"+sfx]||"—")
+              el("div",{style:{fontSize:10,color:"#777",fontWeight:500,fontFamily:F}},form["starSt"+sfx]||"—")
             );
           })
         ),
