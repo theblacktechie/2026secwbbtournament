@@ -119,6 +119,24 @@ const STATS = {
     star2:"Janiah Barker",  starSt2:"20 pts · 6-14 FG · 2-5 from 3 · 6-8 FT · 5 reb",
     notes:"Alabama dominated the first quarter 25-18 and never looked back. Jessica Timmons led the way with 23 on 50% shooting while Ta'Mia Scott added 20. Tennessee's Janiah Barker kept the Vols competitive with 20 points but the Tide's 84.2% from the free throw line (16-19) was the difference. Alabama advances to the Quarterfinals.",
   },
+  g11:{
+    score1:"78",score2:"89",
+    q1_1:"6", q2_1:"11",q3_1:"24",q4_1:"37",
+    q1_2:"25",q2_2:"24",q3_2:"16",q4_2:"24",
+    reb1:"35",ast1:"14",reb2:"38",ast2:"22",
+    star1:"Mikayla Blakes",  starSt1:"24 pts · 8-27 FG · 5-14 3PT · 2 reb",
+    star2:"Latasha Lattimore",starSt2:"28 pts · 12-13 FG · 92.3% · 8 reb · 3 ast",
+    notes:"Ole Miss took full control early, building a 49-17 halftime lead. Latasha Lattimore was nearly perfect shooting 92.3% from the field. Vanderbilt made it interesting with a furious second-half comeback — outscoring Ole Miss 61-40 over the final two quarters — but the deficit was too deep. Ole Miss advances to the Semifinals.",
+  },
+  g9:{
+    score1:"87",score2:"64",
+    q1_1:"22",q2_1:"22",q3_1:"24",q4_1:"19",
+    q1_2:"16",q2_2:"11",q3_2:"18",q4_2:"19",
+    reb1:"36",ast1:"21",reb2:"30",ast2:"13",
+    star1:"Joyce Edwards",  starSt1:"21 pts · 8-12 FG · 5-6 FT · 4 reb · 2 ast",
+    star2:"Amelia Hassett", starSt2:"15 pts · 5-5 FG · 5-5 3PT · 5 reb",
+    notes:"South Carolina was dominant from the opening tip, leading wire to wire. Joyce Edwards paced the Gamecocks with 21 while Tessa Johnson added 15. Amelia Hassett shot a perfect 5-5 from three for Kentucky but it wasn't enough — SC's 36-30 rebounding edge and 21 assists showed a complete team effort. South Carolina advances to the Semifinals.",
+  },
   g10:{
     score1:"78",score2:"112",
     q1_1:"19",q2_1:"14",q3_1:"16",q4_1:"29",
@@ -172,8 +190,12 @@ function initBracket() {
   b.qf[2].t2="Ole Miss";
   b.qf[3].t2="Alabama";
   // QF winners
+  b.qf[0].winner="South Carolina";
+  b.sf[0].t1="South Carolina";
   b.qf[1].winner="LSU";
   b.sf[0].t2="LSU";
+  b.qf[2].winner="Ole Miss";
+  b.sf[1].t1="Ole Miss";
   return b;
 }
 
@@ -328,7 +350,7 @@ function GameCard(props){
 function App(){
   var s=useState(initBracket),bracket=s[0],setBracket=s[1];
   var u=useState({}),userStats=u[0],setUserStats=u[1];
-  var r=useState(1),activeRound=r[0],setActiveRound=r[1];
+  var r=useState(2),activeRound=r[0],setActiveRound=r[1];
   var g=useState(null),gameCard=g[0],setGameCard=g[1];
   var f=useState({}),form=f[0],setForm=f[1];
   var touch=useRef(null);
