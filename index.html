@@ -156,7 +156,7 @@ const STATS = {
     notes:"Texas put the game away with a massive 31-point second quarter, outscoring Alabama 52-19 in the first half to build an insurmountable lead. Jordan Lee led the Longhorns with 16 while Bryanna Preston added 13 off the bench. Alabama shot just 40.4% and never found consistent scoring. Texas's bench dropped 38 points and the Longhorns advance to the Semifinals.",
   },
   g13:{
-    score1:"83",score2:"77",
+    score1:"77",score2:"83",
     q1_1:"17",q2_1:"23",q3_1:"14",q4_1:"23",
     q1_2:"21",q2_2:"15",q3_2:"23",q4_2:"24",
     reb1:"38",ast1:"16",reb2:"39",ast2:"17",
@@ -172,6 +172,15 @@ const STATS = {
     star1:"Cotie McMahon",  starSt1:"20 pts · 7-13 FG · 5-5 FT · 4 reb · 1 ast",
     star2:"Madison Booker", starSt2:"31 pts · 14-21 FG · 66.7% · 11 reb · 5 ast",
     notes:"Texas controlled this game with superior ball movement and interior dominance, with 21 assists and 44 points in the paint. Madison Booker was exceptional with 31 points on 66.7% shooting and a near double-double. Ole Miss had two players score 20 (McMahon and Denim DeShields, 8-11 FG) but couldn't match Texas's efficiency. The Longhorns advance to the Championship to face South Carolina.",
+  },
+  g15:{
+    score1:"78",score2:"61",
+    q1_1:"27",q2_1:"18",q3_1:"12",q4_1:"21",
+    q1_2:"12",q2_2:"16",q3_2:"16",q4_2:"17",
+    reb1:"35",ast1:"18",reb2:"26",ast2:"14",
+    star1:"Madison Booker",starSt1:"18 pts · 8-15 FG · 53.3% · 4 reb · 2 ast",
+    star2:"Joyce Edwards", starSt2:"13 pts · 6-13 FG · 5 reb · 2 ast",
+    notes:"Texas claimed the 2026 SEC Championship with a dominant first quarter, outscoring South Carolina 27-12 to set the tone early and never look back. Madison Booker led the Longhorns with 18 points while Justice Carlton added 15 on 75% shooting. South Carolina's Joyce Edwards led the Gamecocks with 13 points but the Gamecocks shot just 46.9% and went 3-12 from three. Texas's 35-26 rebounding edge and 18 assists to SC's 14 told the story of a complete team performance. The Longhorns are 2026 SEC Champions.",
   },
 };
 
@@ -199,7 +208,7 @@ const BRACKET = {
     {id:"g14",t1:"Ole Miss",t2:"Texas",winner:"Texas",time:"7:00 PM"},
   ],
   fin:[
-    {id:"g15",t1:"South Carolina",t2:"Texas",winner:null,time:"3:00 PM"},
+    {id:"g15",t1:"Texas",t2:"South Carolina",winner:"Texas",time:"3:00 PM"},
   ],
 
 };
@@ -266,9 +275,39 @@ function MatchCard(props){
   );
 }
 
+function Confetti(){
+  var canvas=React.useRef(null);
+  React.useEffect(function(){
+    var c=canvas.current;if(!c)return;
+    var ctx=c.getContext("2d");
+    c.width=window.innerWidth;c.height=window.innerHeight;
+    var pieces=[];
+    var colors=["#BF5700","#C8AD82","#002B5C","#F7F5F2","#fff","#F1B82D"];
+    for(var i=0;i<140;i++){
+      pieces.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,w:Math.random()*10+5,h:Math.random()*6+4,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*Math.PI*2,vx:(Math.random()-0.5)*3,vy:Math.random()*4+2,vr:(Math.random()-0.5)*0.15,alpha:1});
+    }
+    var frame,start=null;
+    function draw(ts){
+      if(!start)start=ts;
+      var elapsed=(ts-start)/1000;
+      ctx.clearRect(0,0,c.width,c.height);
+      pieces.forEach(function(p){
+        p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;
+        if(elapsed>3)p.alpha=Math.max(0,p.alpha-0.008);
+        ctx.save();ctx.globalAlpha=p.alpha;ctx.translate(p.x+p.w/2,p.y+p.h/2);ctx.rotate(p.rot);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();
+      });
+      if(elapsed<6)frame=requestAnimationFrame(draw);else ctx.clearRect(0,0,c.width,c.height);
+    }
+    frame=requestAnimationFrame(draw);
+    return function(){cancelAnimationFrame(frame);};
+  },[]);
+  return el("canvas",{ref:canvas,style:{position:"fixed",top:0,left:0,width:"100%",height:"100%",pointerEvents:"none",zIndex:9999}});
+}
+
 function GameCard(props){
   var game=props.game,form=props.form,onClose=props.onClose;
   var t1=game.t1||"Team 1",t2=game.t2||"Team 2",c1=pc(t1),c2=pc(t2);
+  var isChampionship=game.id==="g15";
 
   function Pill(p){
     return el("div",{style:{flex:1,background:"rgba("+rgb(p.color)+",0.07)",border:"1px solid rgba("+rgb(p.color)+",0.2)",borderRadius:8,padding:"8px 6px",textAlign:"center"}},
@@ -281,6 +320,7 @@ function GameCard(props){
   }
 
   return el("div",{style:{minHeight:"100vh",background:BG,fontFamily:F,color:"#1a1a1a",display:"flex",flexDirection:"column"}},
+    isChampionship?el(Confetti,null):null,
     el(Header,{back:onClose,title:t1+" vs "+t2,sub:game.time+" ET"}),
     el("div",{style:{flex:1,overflowY:"auto",padding:"16px 14px 32px"}},
       el("div",{style:{maxWidth:520,margin:"0 auto"}},
@@ -298,6 +338,10 @@ function GameCard(props){
             );
           })
         ),
+        isChampionship?el("div",{style:{textAlign:"center",background:"linear-gradient(135deg,#BF5700,#C8AD82)",borderRadius:10,padding:"12px 16px",marginBottom:14,boxShadow:"0 4px 20px rgba(191,85,0,0.3)"}},
+          el("div",{style:{fontSize:10,color:"rgba(255,255,255,0.8)",fontWeight:600,letterSpacing:3,textTransform:"uppercase",fontFamily:F}},"🏆 2026 SEC Champion"),
+          el("div",{style:{fontSize:22,color:"#fff",fontWeight:800,letterSpacing:1,fontFamily:F,marginTop:4}},game.winner)
+        ):null,
         el("div",{style:{background:WHITE,border:"1px solid #E8E4DE",borderRadius:10,padding:"12px 14px",marginBottom:14,boxShadow:"0 1px 4px rgba(0,0,0,0.04)"}},
           el("div",{style:{fontFamily:F,fontWeight:700,fontSize:11,color:"#1a1a1a",letterSpacing:2,marginBottom:10,borderBottom:"1px solid #F0EDE8",paddingBottom:6}},"QUARTER SCORES"),
           el("div",{style:{display:"grid",gridTemplateColumns:"1fr repeat(4,1fr)",gap:6,alignItems:"center"}},
@@ -344,7 +388,7 @@ function GameCard(props){
 
 function App(){
   var s=useState(function(){return deepClone(BRACKET);}),bracket=s[0],setBracket=s[1];
-  var r=useState(3),activeRound=r[0],setActiveRound=r[1];
+  var r=useState(4),activeRound=r[0],setActiveRound=r[1];
   var g=useState(null),gameCard=g[0],setGameCard=g[1];
   var touch=useRef(null);
 
