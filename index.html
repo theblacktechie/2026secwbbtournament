@@ -162,16 +162,16 @@ const STATS = {
     reb1:"38",ast1:"16",reb2:"39",ast2:"17",
     star1:"MiLaysia Fulwiley",starSt1:"24 pts · 10-21 FG · 2-8 from 3 · 1 reb · 4 ast",
     star2:"Raven Johnson",    starSt2:"22 pts · 9-14 FG · 4-6 from 3 · 3 reb · 8 ast",
-    notes:"A heavyweight battle between two of the SEC's best programs. LSU led after the first quarter but South Carolina answered with a dominant 3rd quarter to retake control. Raven Johnson was the difference maker with 22 points and 8 assists while MiLaysia Fulwiley gave LSU everything she had off the bench. SC's paint dominance (44 pts) and ball movement proved to be the deciding factors. South Carolina advances to the Championship.",
+    notes:"A heavyweight battle with the lead changing 8 times and scores tied 9 times. LSU led after the first quarter but South Carolina answered with a dominant 3rd quarter to retake control. Raven Johnson was the difference maker with 22 points and 8 assists while MiLaysia Fulwiley gave LSU everything she had off the bench. SC's paint dominance (44 pts) and ball movement proved to be the deciding factors. South Carolina advances to the Championship.",
   },
   g14:{
-    score1:"68",score2:"81",
+    score1:"68",score2:"85",
     q1_1:"16",q2_1:"16",q3_1:"23",q4_1:"13",
-    q1_2:"22",q2_2:"20",q3_2:"15",q4_2:"24",
-    reb1:"30",ast1:"7", reb2:"33",ast2:"21",
-    star1:"Cotie McMahon",   starSt1:"20 pts · 7-13 FG · 5-5 FT · 4 reb · 1 ast",
-    star2:"Madison Booker",  starSt2:"29 pts · 13-20 FG · 65% · 11 reb · 5 ast",
-    notes:"Texas controlled this game with superior ball movement and interior dominance, with 21 assists and 42 points in the paint. Madison Booker was exceptional with 29 points on 65% shooting and a near double-double. Ole Miss had two players score 20 (McMahon and Denim DeShields at 20 pts, 8-11 FG) but couldn't match Texas's efficiency. The Longhorns advance to the Championship to face South Carolina.",
+    q1_2:"22",q2_2:"20",q3_2:"15",q4_2:"28",
+    reb1:"30",ast1:"7", reb2:"35",ast2:"21",
+    star1:"Cotie McMahon",  starSt1:"20 pts · 7-13 FG · 5-5 FT · 4 reb · 1 ast",
+    star2:"Madison Booker", starSt2:"31 pts · 14-21 FG · 66.7% · 11 reb · 5 ast",
+    notes:"Texas controlled this game with superior ball movement and interior dominance, with 21 assists and 44 points in the paint. Madison Booker was exceptional with 31 points on 66.7% shooting and a near double-double. Ole Miss had two players score 20 (McMahon and Denim DeShields, 8-11 FG) but couldn't match Texas's efficiency. The Longhorns advance to the Championship to face South Carolina.",
   },
 };
 
@@ -196,11 +196,12 @@ const BRACKET = {
   ],
   sf:[
     {id:"g13",t1:"South Carolina",t2:"LSU",   winner:"South Carolina",time:"4:30 PM"},
-    {id:"g14",t1:"Ole Miss",       t2:"Texas", winner:"Texas",         time:"7:00 PM"},
+    {id:"g14",t1:"Ole Miss",t2:"Texas",winner:"Texas",time:"7:00 PM"},
   ],
   fin:[
     {id:"g15",t1:"South Carolina",t2:"Texas",winner:null,time:"3:00 PM"},
   ],
+
 };
 
 function deepClone(o){return JSON.parse(JSON.stringify(o));}
